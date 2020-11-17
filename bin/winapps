@@ -74,6 +74,7 @@ if [ "${MULTIMON}" = "true" ]; then
 	MULTI_FLAG="multimon"
 fi
 
+# TODO move xfreerdp invocation into a function to simplify code and reduce repetition
 if [ "${1}" = "windows" ]; then
 	xfreerdp ${RDP_FLAGS} /d:"${RDP_DOMAIN}" /u:"${RDP_USER}" /p:"${RDP_PASS}" /v:${RDP_IP} /scale:${RDP_SCALE} /dynamic-resolution +auto-reconnect +home-drive /wm-class:"Microsoft Windows" 1> /dev/null 2>&1 &
 elif [ "${1}" = "check" ]; then
