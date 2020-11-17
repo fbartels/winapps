@@ -12,13 +12,15 @@ if [ ! -d "${HOME}/.local/share/winapps" ]; then
 	mkdir -p "${HOME}/.local/share/winapps"
 fi
 
-RDP_SCALE=100
 
 if [ -f "${HOME}/.config/winapps/winapps.conf" ]; then
 	. "${HOME}/.config/winapps/winapps.conf"
 else
 	. "${HOME}/.winapps"
 fi
+
+# define default values
+RDP_SCALE=${RDP_SCALE:-100}
 
 function dprint() {
 	if [ "${DEBUG}" = "true" ]; then
@@ -34,7 +36,7 @@ if [ -f "${HOME}/.local/share/winapps/run" ]; then
 	touch "${HOME}/.local/share/winapps/run"
 	THIS_RUN=$(stat -t -c %Y "${HOME}/.local/share/winapps/run")
 	dprint "THIS_RUN:${THIS_RUN}"
-	if (( $THIS_RUN - $LAST_RAN < 2 )); then
+	if (( THIS_RUN - LAST_RAN < 2 )); then
 		exit
 	fi
 else
